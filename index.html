@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111315">
+<title>رتّبلي | كاتب إعلانات المنتجات</title>
+<style>
+:root{--bg:#101214;--panel:#191d20;--panel2:#202529;--text:#f4f5f2;--muted:#a7b0ad;--orange:#ff8a32;--mint:#8de0bd;--line:#30383a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#26352f 0,transparent 32%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{width:min(920px,92%);margin:auto;padding:34px 0 56px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:46px}.brand{font-size:23px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--orange)}.tag{font-size:12px;color:var(--mint);border:1px solid #456457;padding:7px 12px;border-radius:30px}
+.hero{text-align:center;margin-bottom:30px}.hero small{color:var(--mint);font-weight:700}.hero h1{font-size:clamp(30px,6vw,48px);margin:12px 0}.hero p{color:var(--muted);line-height:1.9;margin:0 auto;max-width:570px}
+.card{background:linear-gradient(145deg,#1c2124,#171a1d);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);box-shadow:0 20px 70px #0005}
+label{display:block;font-size:14px;font-weight:700;margin:0 0 9px}.field{margin-bottom:20px}input,textarea,select{width:100%;background:#111517;border:1px solid #374044;border-radius:12px;color:var(--text);padding:14px;font:inherit;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #ff8a3220}textarea{min-height:105px;resize:vertical;line-height:1.8}input::placeholder,textarea::placeholder{color:#77817e}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.tones{display:flex;flex-wrap:wrap;gap:9px}.tone{border:1px solid #3a4445;background:#121719;color:#cbd2cf;border-radius:30px;padding:9px 15px;cursor:pointer}.tone.active{border-color:var(--orange);background:#392719;color:#ffc18f}.primary{width:100%;border:0;border-radius:13px;padding:15px;background:linear-gradient(90deg,var(--orange),#ffad5f);color:#24160c;font:inherit;font-weight:850;font-size:16px;cursor:pointer;margin-top:4px}.primary:active,.copy:active{transform:scale(.99)}.result{display:none;margin-top:20px}.result.show{display:block}.result-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.result-head strong{color:var(--mint)}.copy{background:#243c32;color:var(--mint);border:1px solid #426b59;padding:9px 13px;border-radius:10px;font:inherit;cursor:pointer}.output{white-space:pre-wrap;line-height:1.95;background:#111517;border:1px solid var(--line);border-radius:13px;padding:17px;min-height:120px}.hint{color:var(--muted);font-size:12px;line-height:1.8;margin-top:18px;text-align:center}.footer{text-align:center;color:#77817e;font-size:12px;margin-top:24px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.wrap{padding-top:22px}.top{margin-bottom:34px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><div class="brand">رتّب<span>لي</span></div><div class="tag">أداة مجانية لصنّاع البيع</div></header>
+<section class="hero"><small>خلّي وصف منتجك يبيع</small><h1>إعلان مرتب، بثواني.</h1><p>اكتب اسم المنتج ومميزاته، وخلي «رتّبلي» يصيغ لك إعلان واضح وجذاب تگدر تنسخه وتنشره مباشرة.</p></section>
+<section class="card">
+<div class="field"><label for="product">اسم المنتج</label><input id="product" maxlength="90" placeholder="مثلاً: سماعة بلوتوث لاسلكية"></div>
+<div class="grid">
+<div class="field"><label for="price">السعر (اختياري)</label><input id="price" maxlength="40" placeholder="مثلاً: 25,000 دينار"></div>
+<div class="field"><label for="audience">الفئة المستهدفة (اختياري)</label><input id="audience" maxlength="70" placeholder="مثلاً: محبي الرياضة"></div>
+</div>
+<div class="field"><label for="features">مميزات المنتج</label><textarea id="features" maxlength="600" placeholder="اكتب المميزات، كل ميزة بسطر أو افصل بينها بفاصلة..."></textarea></div>
+<div class="field"><label>أسلوب الإعلان</label><div class="tones" id="tones"><button type="button" class="tone active" data-tone="حماسي">🔥 حماسي</button><button type="button" class="tone" data-tone="احترافي">احترافي</button><button type="button" class="tone" data-tone="بسيط">بسيط</button><button type="button" class="tone" data-tone="راقي">راقي</button></div></div>
+<button class="primary" id="make">✨ أنشئ الإعلان</button>
+<div class="result" id="result"><div class="result-head"><strong>إعلانك جاهز</strong><button class="copy" id="copy">نسخ الإعلان</button></div><div class="output" id="output"></div></div>
+<p class="hint">نصيحة: كلما كتبت مميزات حقيقية وواضحة، صار إعلانك أقوى وأكثر إقناعاً.</p>
+</section>
+<footer class="footer">رتّبلي — كتابة أسهل، عرض أوضح.</footer>
+</main>
+<script>
+let tone='حماسي';
+document.querySelectorAll('.tone').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tone').forEach(x=>x.classList.remove('active'));b.classList.add('active');tone=b.dataset.tone}));
+const $=id=>document.getElementById(id);
+$('make').addEventListener('click',()=>{
+ const name=$('product').value.trim(),price=$('price').value.trim(),audience=$('audience').value.trim(),raw=$('features').value.trim();
+ if(!name){$('product').focus();$('product').setCustomValidity('اكتب اسم المنتج أولاً');$('product').reportValidity();$('product').setCustomValidity('');return}
+ const features=raw.split(/[،,\n]/).map(x=>x.trim()).filter(Boolean);
+ const intros={حماسي:'🔥 لا تفوّت الفرصة! تعرّف على',احترافي:'نقدّم لكم',بسيط:'إذا تبحث عن خيار عملي،',راقي:'اختيار أنيق يضيف قيمة ليومك:'};
+ const end={حماسي:'اطلبه هسه وخلي تجربتك أحلى! 🚀',احترافي:'للطلب والاستفسار، راسلنا الآن.',بسيط:'للطلب أو التفاصيل، تواصل ويانا.',راقي:'للطلب ومعرفة التفاصيل، يسعدنا تواصلك.'};
+ let text=intros[tone]+' '+name+(tone==='بسيط'?'':'!')+'\n\n';
+ if(audience)text+='مناسب لـ '+audience+'.\n\n';
+ if(features.length)text+='✨ أبرز المميزات:\n'+features.map(x=>'• '+x).join('\n')+'\n\n';
+ if(price)text+='💰 السعر: '+price+'\n\n';
+ text+=end[tone]+'\n\n#'+name.replace(/\s+/g,'_');
+ $('output').textContent=text;$('result').classList.add('show');$('result').scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('output').textContent);$('copy').textContent='تم النسخ ✓'}catch(e){const r=document.createRange();r.selectNodeContents($('output'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('copy').textContent='حدّد النص وانسخه'}});
+</script>
+</body>
+</html>
